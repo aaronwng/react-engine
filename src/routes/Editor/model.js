@@ -1,6 +1,7 @@
 import { delay } from 'redux-saga'
-export default {
-	state: '',
+export default ()=>{
+	return {
+		state: '',
 	reducers: {
 		setText(state,action){
 			return action.payload
@@ -12,5 +13,7 @@ export default {
 			yield call(delay, 1000)
 			yield put({type:'setText',payload: payload })
 		}
+	}
+
 	}
 }

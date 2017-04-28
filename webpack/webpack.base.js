@@ -14,13 +14,11 @@ module.exports = {
 
   entry: {
     bundle :[
-      'react-hot-loader/patch',
+    'react-hot-loader/patch',
       hotMiddlewareScript,
       // activate HMR for React
-      
       'webpack/hot/only-dev-server',
-      // "../src/hot-reload.js"
-      "../src/main.js"
+      "../src/hot-reload.js"
     ]
   }, // string | object | array
   // Here the application starts executing
@@ -137,7 +135,7 @@ module.exports = {
     // extensions that are used
 
     alias: {
-      
+      main: '../src/main.js'
     },
   },
   performance: {
@@ -174,7 +172,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     // enable HMR globally
 
-    new webpack.NamedModulesPlugin(),
+    // new webpack.NamedModulesPlugin(),
     // build optimization plugins
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendor',

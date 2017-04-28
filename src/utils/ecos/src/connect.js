@@ -3,7 +3,7 @@ const connect = require('react-redux').connect;
 import React from 'react';
 
 
-export default (app) => (state) => (Component) => {
+export default (app) => (state) => (Component,isExpose) => {
 	class WrapDispatch extends React.Component {
 		constructor(props) {
 			super(props);
@@ -25,15 +25,21 @@ export default (app) => (state) => (Component) => {
 
 	return class Connected extends React.Component {
 		componentWillMount() {
+			debugger
 			this.namespace = this.props.match.url
 			Object.hasOwnProperty.call(app._store.getState(),this.namespace)||app.model({
-				...state
+				...state()
 				, namespace: this.namespace
 			})
-			
-			this.ConnectedComponent = connect((state)=>{ 
-				return {reduxState: state[this.namespace]} 
-			})(WrapDispatch)
+			if(isExpose){
+				this.ConnectedComponent = connect((state)=>{ 
+					return {reduxState: state[this.namespace]} 
+				})(Component)
+			}else{
+				this.ConnectedComponent = connect((state)=>{ 
+					return {reduxState: state[this.namespace]} 
+				})(WrapDispatch)
+			}
 		}
 		// componentWillUnmount() {
 		// 	app.unmodel(this.props.match.url)

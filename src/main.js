@@ -1,5 +1,6 @@
 import React from 'react'
 import ecos from './utils/ecos'
+import ReactDOM from 'react-dom';
 
 import {Switch,Route} from 'react-router-dom'
 
@@ -40,6 +41,13 @@ const Routers = function ({ history, app }) {
 ecos.router(Routers)
 
 // 4. Start
-ecos.start('#app')
+const Ecos = ecos.start('#app')
 
-export default ecos
+let container = document.getElementById('app')
+
+// ReactDOM.render(
+//       <Ecos></Ecos>,
+//       container
+//     );
+
+export default Ecos

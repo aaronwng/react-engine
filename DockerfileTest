@@ -1,0 +1,10 @@
+FROM node:6.9.1
+MAINTAINER aaronwang@rancher.com
+
+RUN mkdir -p /web
+COPY . /web
+WORKDIR /web
+RUN npm rebuild node-sass --force
+EXPOSE 3000
+
+CMD ["npm","run", "dev"]

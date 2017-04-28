@@ -7,7 +7,7 @@ const columns = [{
   key: 'name',
   render: text => <a href="#">{text}</a>,
 }, {
-  title: 'Age',
+  title: 'Age3',
   dataIndex: 'age',
   key: 'age',
 }, {
@@ -31,7 +31,7 @@ const columns = [{
 }];
 
 const data = [{
-  key: '1',
+  key: '12224',
   name: 'John Brown',
   age: 32,
   address: 'New York No. 1 Lake Park',
@@ -42,7 +42,7 @@ const data = [{
   address: 'London No. 1 Lake Park',
 }, {
   key: '3',
-  name: 'Joe Black',
+  name: 'Joe Black34993',
   age: 32,
   address: 'Sidney No. 1 Lake Park',
 }];

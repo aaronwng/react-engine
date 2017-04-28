@@ -9,5 +9,7 @@ module.exports = [
 			require('./routes/Editor'),
 			require('./routes/MarkDown'),
 		]
-	}
+
+	},
+
 ]

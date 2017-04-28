@@ -13,12 +13,13 @@ let MentionBox = ({dispatch,reduxState}) =>(
   <Mention
     style={{ width: '100%', height: 100 }}
     onChange={(editorState)=>{
-	  dispatch({
-	  	type: 'setText'
-	  	,payload: toString(editorState)
-	  })
+      debugger
+  	  dispatch({
+  	  	type: 'setText'
+  	  	,payload: toString(editorState)
+  	  })
     }}
-    defaultValue={toEditorState('@afc163')}
+    value={toEditorState(reduxState)}
     suggestions={['afc163', 'benjycui', 'yiminghe', 'RaoHai', '中文', 'にほんご']}
     onSelect={onSelect}
   />)

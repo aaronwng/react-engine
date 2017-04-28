@@ -264,12 +264,14 @@ export default function createDva(createOpts) {
       this.unmodel = unmodel.bind(this, createReducer, reducers, unlisteners);
 
       // If has container, render; else, return react component
-      if (container) {
-        render(container, store, this, this._router);
-        plugin.apply('onHmr')(render.bind(this, container, store, this));
-      } else {
-        return getProvider(store, this, this._router);
-      }
+      // if (container) {
+      //   render(container, store, this, this._router);
+      //   plugin.apply('onHmr')(render.bind(this, container, store, this));
+      // } else {
+      //   console.error('must have container provided to start')
+      // }
+  
+      return getProvider(store, this, this._router)
     }
 
     // //////////////////////////////////
@@ -284,13 +286,11 @@ export default function createDva(createOpts) {
     }
 
     function render(container, store, app, router) {
-      
-      
       const ReactDOM = require('react-dom');
       if(process.env.NODE_ENV !== 'production'){
         const { AppContainer } = require('react-hot-loader') 
         // AppContainer is a necessary wrapper component for HMR
-        const render = (Component,container) => {
+        const renderHRM = (Component,container) => {
           ReactDOM.render(
               <AppContainer>
                 {Component}
@@ -298,16 +298,21 @@ export default function createDva(createOpts) {
               container
             );
         };
-
+        const Provider = getProvider(store, app, router)
+        debugger
+        renderHRM(<Provider></Provider>,container)
         if (module.hot) {
-          module.hot.accept('./createEcos', () => {
+           module.hot.accept('main',(l) => {
+            console.log(l)
+            debugger
             console.log('arguments',arguments)
-            render(React.createElement(getProvider(store, app, router)),container)
+            renderHRM(<Provider></Provider>,container)
           });
         }
-        render(React.createElement(getProvider(store, app, router)),container)
+        
       }else{
-        ReactDOM.render(React.createElement(getProvider(store, app, router)), container);
+        const Provider = getProvider(store, app, router)
+        ReactDOM.render(<Provider></Provider>, container);
       }
       
     }
