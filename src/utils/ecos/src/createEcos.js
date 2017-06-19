@@ -84,9 +84,9 @@ export default function createDva(createOpts) {
       m = checkModel(m, mobile);
       this._models.push(m);
       const store = this._store;
-
       // reducers
       store.asyncReducers[m.namespace] = getReducer(m.reducers, m.state);
+
       store.replaceReducer(createReducer(store.asyncReducers));
       // effects
       if (m.effects) {
@@ -106,6 +106,8 @@ export default function createDva(createOpts) {
       // Delete reducers
       delete store.asyncReducers[namespace];
       delete reducers[namespace];
+      console.log(reducers)
+      console.log(store.asyncReducers)
       store.replaceReducer(createReducer(store.asyncReducers));
       store.dispatch({ type: '@@ecos/UPDATE' });
 
@@ -226,11 +228,13 @@ export default function createDva(createOpts) {
       );
 
       function createReducer(asyncReducers) {
-        return reducerEnhancer(combineReducers({
+        let allReducers = {
           ...reducers,
           ...extraReducers,
           ...asyncReducers,
-        }));
+        }
+        console.log(allReducers)
+        return reducerEnhancer(combineReducers(allReducers));
       }
 
       // extend store

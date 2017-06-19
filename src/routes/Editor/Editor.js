@@ -10,18 +10,12 @@ function onSelect(suggestion) {
 }
 
 let MentionBox = ({dispatch,reduxState}) =>(
-  <Mention
-    style={{ width: '100%', height: 100 }}
-    onChange={(editorState)=>{
-      debugger
-  	  dispatch({
-  	  	type: 'setText'
-  	  	,payload: toString(editorState)
-  	  })
-    }}
-    value={toEditorState(reduxState)}
-    suggestions={['afc163', 'benjycui', 'yiminghe', 'RaoHai', '中文', 'にほんご']}
-    onSelect={onSelect}
-  />)
+  <input type="text" value={reduxState} onChange={(e)=>{
+      dispatch({
+        type: 'setText'
+        ,payload: e.target.value
+      })
+    }}/>
+)
 
 export default connect(require('./model'))(MentionBox)

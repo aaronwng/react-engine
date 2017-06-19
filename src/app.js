@@ -64,7 +64,7 @@ class Demo extends React.Component {
       activeKey: '/'
     },()=>{
       debugger
-      this.props.parentAction.app.unmodel(targetKey)
+      // this.props.parentAction.app.unmodel(targetKey)
     })
     this.props.history.push('/')
   }

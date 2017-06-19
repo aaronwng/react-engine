@@ -22,9 +22,12 @@ function reduceReducers(...reducers) {
 }
 
 function handleActions(handlers, defaultState) {
+  debugger
   const reducers = Object.keys(handlers).map(type => handleAction(type, handlers[type]));
   const reducer = reduceReducers(...reducers);
-  return (state = defaultState, action) => reducer(state, action);
+  return (state = defaultState, action) => {
+    return reducer(state, action);
+  }
 }
 
 export default handleActions;

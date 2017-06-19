@@ -25,12 +25,17 @@ export default (app) => (state) => (Component,isExpose) => {
 
 	return class Connected extends React.Component {
 		componentWillMount() {
-			debugger
 			this.namespace = this.props.match.url
-			Object.hasOwnProperty.call(app._store.getState(),this.namespace)||app.model({
-				...state()
-				, namespace: this.namespace
-			})
+			if(
+				!Object.hasOwnProperty.call(app._store.getState(),this.namespace)
+				)
+			{
+				app.model({
+					...state
+					, namespace: this.namespace
+				})
+			}
+
 			if(isExpose){
 				this.ConnectedComponent = connect((state)=>{ 
 					return {reduxState: state[this.namespace]} 
@@ -41,9 +46,9 @@ export default (app) => (state) => (Component,isExpose) => {
 				})(WrapDispatch)
 			}
 		}
-		// componentWillUnmount() {
-		// 	app.unmodel(this.props.match.url)
-		// }
+		componentWillUnmount() {
+			app.unmodel(this.props.match.url)
+		}
 		render() {
 			let ConnectedComponent = this.ConnectedComponent
 			return <ConnectedComponent {...this.props}></ConnectedComponent>
